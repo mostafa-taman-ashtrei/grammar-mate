@@ -7,6 +7,10 @@ interface props {
 }
 
 const TextData: React.FC<props> = ({ text, backOrForward }) => {
+    const handleCopyText = async () => {
+        await navigator.clipboard.writeText(text);
+    };
+
     return (
         <div className="px-4 py-1 w-full justify-center items-center">
             <div className="flex flex-row justify-between items-center mb-1 border-b pb-1">
@@ -15,7 +19,10 @@ const TextData: React.FC<props> = ({ text, backOrForward }) => {
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
-                            <Copy className="text-sky-500 cursor-pointer" />
+                            <Copy
+                                className="text-sky-500 cursor-pointer"
+                                onClick={handleCopyText}
+                            />
                         </TooltipTrigger>
 
                         <TooltipContent align="end">

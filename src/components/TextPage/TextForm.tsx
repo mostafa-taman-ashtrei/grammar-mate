@@ -6,6 +6,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { correctGrammar } from "@/lib/openai";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -19,7 +20,6 @@ const formSchema = z.object({
 });
 
 const TextForm: React.FC<props> = ({ setText, backOrForward }) => {
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -35,9 +35,11 @@ const TextForm: React.FC<props> = ({ setText, backOrForward }) => {
     };
 
     const handleSubmitForm = async (values: z.infer<typeof formSchema>) => {
-        setText(values.text);
-        backOrForward();
+        const res = await correctGrammar(values.text);
+        if (!res.content) return;
+        setText(res.content);
 
+        backOrForward();
     };
 
     return (
