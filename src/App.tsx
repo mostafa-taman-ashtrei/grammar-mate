@@ -1,12 +1,12 @@
-import { Button } from "./components/ui/button";
+import TextPage from "./pages/TextPage";
+import { ThemeProvider } from "./providers/ThemeProvider";
 
 const App: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 h-screen">
-      Hello World!
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <TextPage />
+    </ThemeProvider>
 
-      <Button>Hey there I'm a btn</Button>
-    </div>
   );
 };
 
