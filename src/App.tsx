@@ -6,7 +6,6 @@ const App: React.FC = () => {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <TextPage />
     </ThemeProvider>
-
   );
 };
 
